@@ -1,0 +1,20 @@
+name: iOS CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7' # Ruby version used in the project
+
+    - name: Install Fastlane
+      run: gem install fastlane
+
+    - name: Fastlane Build
+      run: fastlane build_app
