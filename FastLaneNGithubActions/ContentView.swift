@@ -15,6 +15,7 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Hello, this is Marlhex!")
             Text("Welcome")
+            Text("Adding fastline files to github")
         }
         .padding()
     }
