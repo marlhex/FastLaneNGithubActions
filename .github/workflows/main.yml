@@ -13,8 +13,23 @@ jobs:
       with:
         ruby-version: '2.7' # Ruby version used in the project
 
+    # Add steps to reassemble the .developerprofile file
+    - name: Reassemble Developer Profile
+      run: |
+        echo "${{ secrets.FASTLANE_WITHGITHUBACTIONS_PART_AA }}" >> combined_developerprofile.base64
+        echo "${{ secrets.FASTLANE_WITHGITHUBACTIONS_PART_AB }}" >> combined_developerprofile.base64
+        echo "${{ secrets.FASTLANE_WITHGITHUBACTIONS_PART_AC }}" >> combined_developerprofile.base64
+        echo "${{ secrets.FASTLANE_WITHGITHUBACTIONS_PART_AD }}" >> combined_developerprofile.base64
+        base64 --decode combined_developerprofile.base64 > Untitled.developerprofile
+
+    - name: Import Developer Profile
+      run: security import Untitled.developerprofile -P ${{ secrets.DEV_PROFILE_PASSWORD }} -A
+      # DEV_PROFILE_PASSWORD is the GitHub Secret containing the password for the .developerprofile file
+
+    # Installation of Fastlane
     - name: Install Fastlane
       run: gem install fastlane
 
+    # Fastlane build step
     - name: Fastlane Build
       run: fastlane build_app
