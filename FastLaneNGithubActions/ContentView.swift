@@ -16,6 +16,7 @@ struct ContentView: View {
             Text("Hello, this is Marlhex!")
             Text("Welcome")
             Text("Adding fastline files to github")
+            Text("Github Actions")
         }
         .padding()
     }
